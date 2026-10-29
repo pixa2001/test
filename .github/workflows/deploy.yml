@@ -35,4 +35,29 @@ jobs:
     environment:
       name: github-pages
     steps:
+      - name: Use the production workflow as the Pages source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
       - uses: actions/deploy-pages@v4
+        id: deployment
+      - name: Verify the public production app
+        env:
+          PAGES_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PYTHON'
+          import os, re, time, urllib.request, urllib.parse
+          url = os.environ['PAGES_URL']
+          for attempt in range(12):
+              try:
+                  html = urllib.request.urlopen(url, timeout=20).read().decode()
+                  asset = re.search(r'src="([^"]*/assets/[^" ]+\.js)"', html)
+                  assert asset, 'Pages is not serving the compiled app yet'
+                  urllib.request.urlopen(urllib.parse.urljoin(url, asset.group(1)), timeout=20).read(100)
+                  print('Verified public HTML and production JavaScript:', url)
+                  break
+              except Exception:
+                  if attempt == 11:
+                      raise
+                  time.sleep(5)
+          PYTHON
