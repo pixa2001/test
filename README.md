@@ -32,7 +32,9 @@ The bundled SVGs are **atmospheric illustrations, not original photos of the roo
 
 ## GitHub Pages
 
-Commit and push the project to `main`. In repository Settings → Pages select GitHub Actions. `.github/workflows/deploy.yml` builds and deploys the static site. Repository variables:
+Commit and push the project to `main`. In repository Settings → Pages select GitHub Actions. `.github/workflows/deploy.yml` builds and deploys the static site. The workflow also waits for any older branch-based Pages build before deploying the Vite artifact, and verifies the public HTML and JavaScript afterward. Selecting GitHub Actions as the Pages source disables that redundant legacy build.
+
+Repository variables:
 
 - `BASE_PATH`: `/test/` for `pixa2001/test` project Pages; `/` for a custom domain or user Pages.
 - `VITE_API_URL`: HTTPS origin of the separately deployed API, without a trailing path.
