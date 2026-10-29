@@ -1,9 +1,118 @@
-import {useState} from 'react';
-import {ArrowUpRight,ArrowDown,Menu,X,MapPin,Users,Music2,Wine,Lightbulb,Refrigerator,Clock} from 'lucide-react';
-import data from './data/partyraum.json';
-import {de} from './data/i18n';
-import Gallery from './components/Gallery';
-import Inquiry from './components/Inquiry';
-import Chat from './components/Chat';
-const icons=[Users,Wine,Music2,Lightbulb,Refrigerator,Clock];
-export default function App(){const [menu,setMenu]=useState(false),[date,setDate]=useState('');return <><a className="skip" href="#main">Zum Inhalt</a><header><a className="logo" href="#" aria-label="Taberna Flamenca Startseite"><span className="logo-mark">tf<span>✳</span></span><span>TABERNA<small>FLAMENCA · KÖLN</small></span></a><nav className={menu?'open':''} aria-label="Hauptnavigation">{de.nav.map((n,i)=><a onClick={()=>setMenu(false)} key={n} href={'#'+['partyraum','ausstattung','galerie','preise','faq'][i]}>{n}</a>)}<a href="#anfrage" className="nav-cta" onClick={()=>setMenu(false)}>Termin anfragen <ArrowUpRight size={15}/></a></nav><button className="menu-toggle" onClick={()=>setMenu(!menu)} aria-label="Menü öffnen oder schließen" aria-expanded={menu}>{menu?<X/>:<Menu/>}</button></header><main id="main"><section className="hero" id="partyraum"><img className="hero-image" src={import.meta.env.BASE_URL+'images/atmosphere.svg'} alt="Illustrative Bordeaux- und Gold-Lichtstimmung" fetchPriority="high" width="1600" height="1100"/><div className="hero-shade"/><div className="hero-content"><p className="eyebrow"><span/> DEINE NACHT. MITTEN IN KÖLN.</p><h1>Ein Raum.<br/>Tausend <em>Erinnerungen.</em></h1><p className="hero-copy">Deine Lieblingsmenschen. Deine Musik. Dein Abend.<br/>Feiere deinen besonderen Moment im Partyraum der Taberna Flamenca.</p><div className="hero-actions"><a className="button" href="#anfrage">Deinen Abend anfragen <ArrowUpRight size={18}/></a><a className="text-link" href="#galerie">Raum entdecken <ArrowDown size={16}/></a></div><p className="location"><MapPin size={15}/>{data.address}</p></div><span className="hero-side">BUENAS NOCHES. GUTE ERINNERUNGEN.</span><div className="hero-bottom"><span>01 / DEIN ABEND BEGINNT HIER</span><span>SCROLL TO EXPLORE <ArrowDown size={13}/></span></div></section><div className="facts"><div><strong>70<span> ca.</span></strong><span>GÄSTE. EINE GUTE ZEIT.</span></div><div><strong>500 €</strong><span>RAUMMIETE</span></div><div><strong>04:00</strong><span>SPÄTESTES ENDE</span></div><div><strong>100 %</strong><span>DEIN ANLASS</span></div></div><section className="intro section"><div><p className="eyebrow">NICHT IRGENDEIN RAUM. DEIN RAUM.</p><h2>Für Nächte, die<br/><em>in Erinnerung bleiben.</em></h2></div><div className="intro-copy"><p>Ein Geburtstag mit all deinen Lieblingsmenschen. Eine Firmenfeier, die sich nicht nach Arbeit anfühlt. Oder einfach ein richtig guter Grund, zusammenzukommen.</p><p>Im {data.floor} der Taberna Flamenca gehört der Abend euch. Mitten in der Kölner Altstadt – mit Platz für bis ca. {data.capacity} Personen und der Freiheit, eure Feier selbst zu gestalten.</p><a className="text-link gold" href="#anfrage">Lass uns deinen Abend planen <ArrowUpRight size={17}/></a></div></section><section className="section amenities" id="ausstattung"><div className="section-heading"><div><p className="eyebrow">ALLES DA FÜR EURE NACHT</p><h2>Du bringst die Gäste.<br/><em>Wir haben den Raum.</em></h2></div><p>Unkompliziert feiern.<br/>Mit allem, was den Unterschied macht.</p></div><div className="feature-grid">{data.features.map((f,i)=>{const Icon=icons[i];return <article key={f.title}><Icon size={25} strokeWidth={1.3}/><span className="feature-number">0{i+1}</span><h3>{f.title}</h3><p>{f.text}</p></article>})}</div></section><section className="section" id="galerie"><div className="section-heading"><div><p className="eyebrow">EIN GEFÜHL FÜR DEINEN ABEND</p><h2>Ein bisschen <em>Vorfreude.</em></h2></div><span className="tag">TABERNA MOODBOARD ↗</span></div><Gallery/></section><section id="preise" className="price-section section"><div><p className="eyebrow">KLARER PREIS. VIELE MÖGLICHKEITEN.</p><h2>Ein Raum für<br/><em>deine Ideen.</em></h2><p>Ob Geburtstag, Firmenfeier oder privater Anlass:<br/>Mach die Taberna für einen Abend zu deinem Ort.</p><a className="text-link gold" href="#anfrage">Wunschtermin prüfen lassen <ArrowUpRight size={18}/></a></div><div className="price-card"><span className="eyebrow">DEIN PARTYRAUM</span><div className="price">{data.rent} €<span>Raummiete</span></div><ul><li>Bis ca. {data.capacity} Gäste · {data.floor}</li><li>Musikanlage & Smart-Beleuchtung</li><li>Kühlschränke vorhanden</li><li>Eigene Getränke & eigenes Catering erlaubt</li></ul><a className="button" href="#anfrage">Jetzt unverbindlich anfragen <ArrowUpRight size={18}/></a><p>Weitere Preis- und Vertragsdetails auf Anfrage.</p></div></section><section className="section faq-section" id="faq"><div><p className="eyebrow">GUT ZU WISSEN</p><h2>Du hast Fragen.<br/><em>Wir die Antworten.</em></h2><p>Noch etwas offen?<br/><a href={`mailto:${data.email}`}>Schreib uns direkt <ArrowUpRight size={14}/></a></p></div><div className="faq-list">{data.faq.map(f=><details key={f.id}><summary>{f.q}<span>+</span></summary><p>{f.a}</p></details>)}</div></section><section className="section inquiry-section" id="anfrage"><div className="inquiry-intro"><p className="eyebrow">AUS EINER IDEE WIRD EIN ABEND</p><h2>Deine Feier.<br/><em>Fängt hier an.</em></h2><p>Erzähl uns, was du vorhast. Wir prüfen deinen Wunschtermin und klären gemeinsam die Details.</p><div className="visit"><Clock size={22}/><h3>Erst mal reinschauen?</h3><p>{data.viewing}</p></div><a href={`mailto:${data.email}`} className="gold">{data.email} <ArrowUpRight size={15}/></a></div><Inquiry date={date} setDate={setDate}/></section><section className="closing-banner"><p className="eyebrow">KÖLN. ALTSTADT. TABERNA.</p><h2>Die besten Nächte<br/>beginnen mit <em>einer Idee.</em></h2><a className="button outline" href="#anfrage">Mach deine draus <ArrowUpRight size={18}/></a></section></main><footer><a className="logo" href="#">TABERNA <small>FLAMENCA</small></a><p>{data.address}<br/><a href={`mailto:${data.email}`}>{data.email}</a></p><div><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a><span>© {new Date().getFullYear()} Taberna Flamenca</span></div></footer><section className="legal section"><details id="impressum"><summary>Impressum · Angaben vor Veröffentlichung vervollständigen</summary><h3>Taberna Flamenca</h3><p>{data.address}<br/>E-Mail: {data.email}</p><p>Veröffentlichungshinweis: Vollständiger rechtlicher Betreibername, Rechtsform, vertretungsberechtigte Person, telefonischer Kontakt sowie gegebenenfalls Register- und Umsatzsteuerangaben fehlen. Diese Angaben müssen vom Betreiber vor Veröffentlichung ergänzt werden.</p></details><details id="datenschutz"><summary>Datenschutz · Hinweise und Veröffentlichungsvoraussetzungen</summary><p>Das Anfrageformular verarbeitet Namen, E-Mail, Telefonnummer und Veranstaltungsangaben zur Bearbeitung deiner Anfrage. Pflichtangaben sind gekennzeichnet. Eine Anfrage führt nicht automatisch zu einer Buchung. Für vorvertragliche Anfragen gilt Art. 6 Abs. 1 lit. b DSGVO, im Übrigen je nach Anfrage Art. 6 Abs. 1 lit. f DSGVO.</p><p>Der Chat gleicht Fragen lokal mit einer Wissensbasis ab. Chatnachrichten werden nicht an einen KI-Anbieter übertragen. Formularangaben werden bei aktivierter API über Cloudflare und den Maildienst Resend an {data.email} übertragen. Der Spam-Schutz Cloudflare Turnstile wird nur bei konfiguriertem öffentlichem Site-Key geladen und kann Verbindungs- und Browserdaten verarbeiten.</p><p>Du kannst Auskunft, Berichtigung, Löschung, Einschränkung und Datenübertragbarkeit sowie gegebenenfalls Widerspruch verlangen und dich bei einer Datenschutzaufsichtsbehörde beschweren. Kontakt: {data.email}.</p><p>Vor Veröffentlichung sind Verantwortlicher und Kontakt, tatsächlicher Hosting-Anbieter, Auftragsverarbeitungsverträge, mögliche Drittlandtransfers und Schutzmaßnahmen sowie konkrete Löschfristen und die Rechtsgrundlage des eingesetzten Spam-Schutzes verbindlich zu ergänzen. Dieser Text ist eine vorbereitete Grundlage und keine abschließend geprüfte Datenschutzerklärung.</p></details></section><Chat onDate={setDate}/></>}
+import { useEffect, useRef, useState } from "react";
+import { Header, Footer, routes, type Page } from "./components/Layout";
+import Chat from "./components/Chat";
+import {
+  Home,
+  Room,
+  EquipmentPage,
+  GalleryPage,
+  Prices,
+  FAQPage,
+  InquiryPage,
+  Legal,
+} from "./pages/Pages";
+import { de } from "./data/i18n";
+const validPages: Page[] = ["home", ...routes, "impressum", "datenschutz"];
+function currentPage(): Page {
+  const p = window.location.hash.replace(/^#\/?/, "") || "home";
+  return validPages.includes(p as Page) ? (p as Page) : "home";
+}
+export default function App() {
+  const [page, setPage] = useState<Page>(currentPage),
+    [date, setDate] = useState("");
+  const main = useRef<HTMLElement>(null);
+  const first = useRef(true);
+  useEffect(() => {
+    const onHash = () => setPage(currentPage());
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+  useEffect(() => {
+    const titles: Record<Page, string> = {
+      home: "Deine Party. Deine Musik. Deine Nacht.",
+      partyraum: de.labels.room,
+      ausstattung: de.labels.equipment,
+      galerie: de.labels.gallery,
+      preise: de.labels.prices,
+      faq: de.labels.faq,
+      anfrage: de.labels.inquiry,
+      impressum: de.labels.legal,
+      datenschutz: de.labels.privacy,
+    };
+    document.title = `${titles[page]} | Taberna Flamenca Köln`;
+    window.scrollTo({ top: 0, behavior: "instant" });
+    if (!first.current) main.current?.focus({ preventScroll: true });
+    first.current = false;
+  }, [page]);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries)
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+      },
+      { threshold: 0.08 },
+    );
+    document
+      .querySelectorAll(
+        ".section-heading,.equipment-card,.price-card,.intro-copy",
+      )
+      .forEach((el) => {
+        el.classList.add("scroll-reveal");
+        observer.observe(el);
+      });
+    return () => observer.disconnect();
+  }, [page]);
+  let content;
+  switch (page) {
+    case "partyraum":
+      content = <Room />;
+      break;
+    case "ausstattung":
+      content = <EquipmentPage />;
+      break;
+    case "galerie":
+      content = <GalleryPage />;
+      break;
+    case "preise":
+      content = <Prices />;
+      break;
+    case "faq":
+      content = <FAQPage />;
+      break;
+    case "anfrage":
+      content = <InquiryPage date={date} setDate={setDate} />;
+      break;
+    case "impressum":
+      content = <Legal />;
+      break;
+    case "datenschutz":
+      content = <Legal privacy />;
+      break;
+    default:
+      content = <Home />;
+  }
+  return (
+    <>
+      <a
+        className="skip"
+        href="#main"
+        onClick={(e) => {
+          e.preventDefault();
+          main.current?.focus();
+        }}
+      >
+        Zum Inhalt
+      </a>
+      <Header page={page} />
+      <main ref={main} id="main" tabIndex={-1} className={`route-${page}`}>
+        {content}
+      </main>
+      <Footer />
+      <Chat onDate={setDate} />
+    </>
+  );
+}

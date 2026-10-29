@@ -16,9 +16,17 @@ npm test
 
 Use `npm ci` for repeatable installs. `npm run build` performs strict TypeScript checks and produces `dist/`. `npm test` tests server validation and email-provider behavior with mocked requests, without sending real email. The static development server does not run Cloudflare Functions.
 
+## Pages and navigation
+
+The website has a home page and six dedicated hash routes: `#/partyraum`, `#/ausstattung`, `#/galerie`, `#/preise`, `#/faq`, and `#/anfrage`. Legal pages use `#/impressum` and `#/datenschutz`. Hash routing allows direct links and reloads on GitHub Pages without a server rewrite. Each route updates the document title; static social metadata remains shared. Navigation, footer and assistant are shared components. Chat date selection stays in app state across internal routes. Privacy opens separately to preserve the form.
+
+## Original logo
+
+The actual round logo file and reference mockup have **not been supplied yet**. `Logo.tsx` intentionally displays a neutral “Original-Logo folgt” placeholder instead of inventing a substitute logo. Put the supplied image into `public/images` and set `brand.logo` in `src/data/partyraum.json`, for example `images/taberna-logo.png`. The same asset is used in desktop/mobile navigation, footer and chat. Its black background blends into the dark surface. The desktop logo overlaps the center of the glass navigation.
+
 ## Content and photos
 
-`src/data/partyraum.json` is the venue knowledge base: facts, FAQ answers, assistant keywords and gallery. `src/data/i18n.ts` contains initial German UI/chat copy and the extension point for English/Spanish. Additional UI labels currently live in components; a complete language switch requires translating those too. `src/components` separates form, accessible dialog gallery and chat.
+`src/data/partyraum.json` is the venue knowledge base: facts, FAQ answers, assistant keywords and gallery. `src/data/i18n.ts` contains initial German UI/chat copy and the extension point for English/Spanish. Form labels, validation status copy and event choices live in `src/data/form.de.ts`. A few short decorative/section labels still live in page components; a complete language switch requires translating those too. `src/components` separates form, accessible dialog gallery and chat.
 
 The bundled SVGs are **atmospheric illustrations, not original photos of the room**. Replace files under `public/images` with licensed real photographs and edit `gallery` entries and `galleryNotice`. Keep descriptive alt text; optimize AVIF/WebP/JPEG dimensions and size. The first image loads eagerly, gallery images lazily. Lightbox supports touch swipes, arrow keys, Escape and native dialog focus containment.
 

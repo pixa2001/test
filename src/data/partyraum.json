@@ -1,9 +1,192 @@
 {
- "name":"Taberna Flamenca", "address":"Salzgasse 8, 50667 Köln", "email":"info@taberna-flamenca.com", "floor":"1. Obergeschoss", "capacity":70, "rent":500,
- "viewing":"Nach Vereinbarung sonntags, mittwochs und donnerstags zwischen 19:00 und 22:00 Uhr.",
- "closing":"Feiern bis maximal 04:00 Uhr. Bis dahin müssen alle Gäste die Location verlassen haben.",
- "features":[{"title":"Platz für deine Menschen","text":"Bis ca. 70 Personen im 1. Obergeschoss."},{"title":"Dein Geschmack. Deine Drinks.","text":"Eigene Getränke sowie eigenes Essen oder Catering dürfen mitgebracht werden."},{"title":"Der Sound ist schon da","text":"Musikanlage vorhanden. Musikzuspielung über Klinke bzw. passenden Adapter. Eine eigene Musikanlage ist nicht erlaubt."},{"title":"Licht an. Alltag aus.","text":"Smart-Beleuchtung vorhanden. Zusätzliche eigene Lichttechnik ist erlaubt."},{"title":"Kühl bleiben","text":"Kühlschränke für eure Getränke sind vorhanden."},{"title":"Eine lange, gute Nacht","text":"Feiern bis maximal 04:00 Uhr. Bis dahin müssen alle Gäste die Location verlassen haben."}],
- "faq":[{"id":"price","keywords":["preis","kost","miete","500"],"q":"Was kostet der Partyraum?","a":"Die Raummiete beträgt 500 €. Weitere Preisdetails klären wir gerne auf direkte Anfrage."},{"id":"capacity","keywords":["personen","gäste","kapazität","platz","groß"],"q":"Wie viele Menschen können mitfeiern?","a":"Der Partyraum im 1. Obergeschoss bietet Platz für bis ca. 70 Personen."},{"id":"drinks","keywords":["getränk","drinks","alkohol"],"q":"Dürfen wir eigene Getränke mitbringen?","a":"Ja, eigene Getränke dürfen mitgebracht werden. Kühlschränke sind vorhanden."},{"id":"food","keywords":["essen","catering","buffet"],"q":"Ist eigenes Essen oder Catering erlaubt?","a":"Ja, eigenes Essen und eigenes Catering dürfen mitgebracht werden."},{"id":"music","keywords":["musik","sound","klinke","dj","adapter"],"q":"Wie funktioniert die Musik?","a":"Eine Musikanlage ist vorhanden. Musik wird über Klinke bzw. einen passenden Adapter zugespielt. Eine eigene Musikanlage ist nicht erlaubt."},{"id":"light","keywords":["licht","beleuchtung"],"q":"Welche Beleuchtung gibt es?","a":"Smart-Beleuchtung ist vorhanden. Zusätzliche eigene Lichttechnik ist erlaubt."},{"id":"hours","keywords":["uhr","lange","ende","feierzeit"],"q":"Bis wann dürfen wir feiern?","a":"Bis maximal 04:00 Uhr. Bis dahin müssen alle Gäste die Location verlassen haben."},{"id":"viewing","keywords":["besichtig","anschauen","ansehen"],"q":"Können wir den Raum vorher besichtigen?","a":"Ja, nach Vereinbarung sonntags, mittwochs und donnerstags zwischen 19:00 und 22:00 Uhr."}],
- "gallery":[{"src":"images/atmosphere.svg","alt":"Illustrative Lichtstimmung in Bordeaux und Gold – kein Originalfoto des Partyraums","label":"Die Stimmung","size":"wide"},{"src":"images/details.svg","alt":"Illustrative warme Lichtdetails – kein Originalfoto","label":"Warme Akzente","size":""},{"src":"images/night.svg","alt":"Illustrative nächtliche Atmosphäre – kein Originalfoto","label":"Für eure Nächte","size":""}],
- "galleryNotice":"Atmosphärische Illustrationen zur Gestaltung. Originalfotos des Partyraums folgen."
+  "name": "Taberna Flamenca",
+  "address": "Salzgasse 8, 50667 Köln",
+  "email": "info@taberna-flamenca.com",
+  "floor": "1. Obergeschoss",
+  "capacity": 70,
+  "rent": 500,
+  "viewing": "Nach Vereinbarung sonntags, mittwochs und donnerstags zwischen 19:00 und 22:00 Uhr.",
+  "closing": "Feiern bis maximal 04:00 Uhr. Bis dahin müssen alle Gäste die Location verlassen haben.",
+  "features": [
+    {
+      "title": "Platz für deine Menschen",
+      "text": "Bis ca. 70 Personen im 1. Obergeschoss."
+    },
+    {
+      "title": "Dein Geschmack. Deine Drinks.",
+      "text": "Eigene Getränke sowie eigenes Essen oder Catering dürfen mitgebracht werden."
+    },
+    {
+      "title": "Der Sound ist schon da",
+      "text": "Musikanlage vorhanden. Musikzuspielung über Klinke bzw. passenden Adapter. Eine eigene Musikanlage ist nicht erlaubt."
+    },
+    {
+      "title": "Licht an. Alltag aus.",
+      "text": "Smart-Beleuchtung vorhanden. Zusätzliche eigene Lichttechnik ist erlaubt."
+    },
+    {
+      "title": "Kühl bleiben",
+      "text": "Kühlschränke für eure Getränke sind vorhanden."
+    },
+    {
+      "title": "Eine lange, gute Nacht",
+      "text": "Feiern bis maximal 04:00 Uhr. Bis dahin müssen alle Gäste die Location verlassen haben."
+    }
+  ],
+  "faq": [
+    {
+      "id": "price",
+      "keywords": ["preis", "kost", "miete", "500"],
+      "q": "Was kostet der Partyraum?",
+      "a": "Die Raummiete beträgt 500 €. Weitere Preisdetails klären wir gerne auf direkte Anfrage."
+    },
+    {
+      "id": "capacity",
+      "keywords": ["personen", "gäste", "kapazität", "platz", "groß"],
+      "q": "Wie viele Menschen können mitfeiern?",
+      "a": "Der Partyraum im 1. Obergeschoss bietet Platz für bis ca. 70 Personen."
+    },
+    {
+      "id": "drinks",
+      "keywords": ["getränk", "drinks", "alkohol"],
+      "q": "Dürfen wir eigene Getränke mitbringen?",
+      "a": "Ja, eigene Getränke dürfen mitgebracht werden. Kühlschränke sind vorhanden."
+    },
+    {
+      "id": "food",
+      "keywords": ["essen", "catering", "buffet"],
+      "q": "Ist eigenes Essen oder Catering erlaubt?",
+      "a": "Ja, eigenes Essen und eigenes Catering dürfen mitgebracht werden."
+    },
+    {
+      "id": "music",
+      "keywords": ["musik", "sound", "klinke", "dj", "adapter"],
+      "q": "Gibt es eine Musikanlage?",
+      "a": "Ja, eine Musikanlage ist vorhanden. Musik wird über Klinke bzw. einen passenden Adapter zugespielt."
+    },
+    {
+      "id": "ownMusic",
+      "keywords": [
+        "eigene musikanlage",
+        "eigene anlage",
+        "eigene boxen",
+        "lautsprecher"
+      ],
+      "q": "Kann ich eine eigene Musikanlage mitbringen?",
+      "a": "Nein, eine eigene Musikanlage darf nicht betrieben werden. Bitte nutzt die vorhandene Anlage über Klinke bzw. einen passenden Adapter."
+    },
+    {
+      "id": "light",
+      "keywords": ["licht", "beleuchtung"],
+      "q": "Darf ich eigene Lichttechnik mitbringen?",
+      "a": "Ja, zusätzliche eigene Lichttechnik ist erlaubt. Smart-Beleuchtung ist bereits vorhanden."
+    },
+    {
+      "id": "hours",
+      "keywords": ["uhr", "lange", "ende", "feierzeit"],
+      "q": "Bis wann dürfen wir feiern?",
+      "a": "Bis maximal 04:00 Uhr. Bis dahin müssen alle Gäste die Location verlassen haben."
+    },
+    {
+      "id": "viewing",
+      "keywords": ["besichtig", "anschauen", "ansehen"],
+      "q": "Können wir den Raum vorher besichtigen?",
+      "a": "Ja, nach Vereinbarung sonntags, mittwochs und donnerstags zwischen 19:00 und 22:00 Uhr."
+    }
+  ],
+  "gallery": [
+    {
+      "src": "images/atmosphere.svg",
+      "alt": "Illustrative Lichtstimmung in Bordeaux und Gold – kein Originalfoto des Partyraums",
+      "label": "Die Stimmung",
+      "size": "wide"
+    },
+    {
+      "src": "images/details.svg",
+      "alt": "Illustrative warme Lichtdetails – kein Originalfoto",
+      "label": "Warme Akzente",
+      "size": ""
+    },
+    {
+      "src": "images/night.svg",
+      "alt": "Illustrative nächtliche Atmosphäre – kein Originalfoto",
+      "label": "Für eure Nächte",
+      "size": ""
+    }
+  ],
+  "galleryNotice": "Atmosphärische Illustrationen zur Gestaltung. Originalfotos des Partyraums folgen.",
+  "brand": {
+    "logo": "",
+    "logoAlt": "Taberna Flamenca – Original-Logo",
+    "logoPending": "Original-Logo folgt"
+  },
+  "heroImage": "images/atmosphere.svg",
+  "heroAlt": "Atmosphärische Illustration – kein Originalfoto des Partyraums",
+  "closingTime": "04:00",
+  "facts": [
+    {
+      "icon": "users",
+      "title": "Bis ca. 70 Personen",
+      "detail": "Platz für deine Lieblingsmenschen"
+    },
+    {
+      "icon": "key",
+      "title": "500 € Raummiete",
+      "detail": "Partyraum im 1. OG"
+    },
+    {
+      "icon": "music",
+      "title": "Musikanlage vorhanden",
+      "detail": "Deine Musik über Klinke / Adapter"
+    },
+    {
+      "icon": "wine",
+      "title": "Eigene Getränke & Catering",
+      "detail": "Feiere ganz nach deinem Geschmack"
+    },
+    {
+      "icon": "clock",
+      "title": "Feiern bis 04:00 Uhr",
+      "detail": "Bis dahin verlassen alle Gäste den Raum"
+    }
+  ],
+  "equipment": [
+    {
+      "icon": "music",
+      "title": "Musikanlage",
+      "text": "Musikzuspielung über die vorhandene Anlage per Klinke bzw. passendem Adapter. Eine eigene Musikanlage ist nicht erlaubt."
+    },
+    {
+      "icon": "light",
+      "title": "Smart-Beleuchtung",
+      "text": "Die vorhandene Smart-Beleuchtung sorgt für die passende Lichtstimmung."
+    },
+    {
+      "icon": "fridge",
+      "title": "Kühlschränke",
+      "text": "Kühlschränke für eure mitgebrachten Getränke sind vorhanden."
+    },
+    {
+      "icon": "dance",
+      "title": "Tanz- & Freifläche",
+      "text": "Nutzt die Tanz-/Freifläche im Partyraum für euren Abend."
+    },
+    {
+      "icon": "sparkles",
+      "title": "Eigene Lichttechnik",
+      "text": "Zusätzliche eigene Lichttechnik darf mitgebracht werden."
+    },
+    {
+      "icon": "wine",
+      "title": "Eigene Getränke & Catering",
+      "text": "Eigene Getränke und eigenes Essen oder Catering dürfen mitgebracht werden."
+    }
+  ],
+  "included": [
+    "Nutzung des Partyraums im 1. OG",
+    "Kühlschränke",
+    "Vorhandene Musikanlage",
+    "Smart-Beleuchtung",
+    "Nutzung der Tanz-/Freifläche"
+  ]
 }
