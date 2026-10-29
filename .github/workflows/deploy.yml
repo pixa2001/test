@@ -35,10 +35,6 @@ jobs:
     environment:
       name: github-pages
     steps:
-      - name: Use the production workflow as the Pages source
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
       - uses: actions/deploy-pages@v4
         id: deployment
       - name: Verify the public production app
