@@ -1,0 +1,2 @@
+export const de = {nav:['Partyraum','Ausstattung','Galerie','Preise','FAQ'], greeting:'Hallo 👋 Ich bin der digitale Partyraum-Assistent der Taberna Flamenca. Was möchtest du über unseren Partyraum wissen?',unknown:'Dazu habe ich keine gesicherte Information. Bitte stelle eine direkte Anfrage an die Taberna Flamenca.',availability:'Der gewünschte Termin muss vom Team geprüft werden. Ich habe keinen Zugriff auf einen Belegungskalender.'};
+export const translations = {de}; // Add en/es here; venue facts stay in partyraum.json.

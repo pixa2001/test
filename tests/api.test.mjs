@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {onRequest} from '../functions/api/inquiry.ts';
+const env={ALLOWED_ORIGIN:'https://example.com',RESEND_API_KEY:'test-only',MAIL_FROM:'Taberna <hello@example.com>',TURNSTILE_SECRET_KEY:'test-only'};
+const payload={firstName:'Ada',lastName:'Test',email:'ada@example.com',phone:'012345678',date:'2099-01-22',eventType:'Geburtstag',occasion:'30. Geburtstag',age:'30',guests:'60',startTime:'20:00',drinks:'Ja',food:'Ja',lights:'Nein',consent:'yes',turnstileToken:'test-token'};
+function request(data=payload,origin=env.ALLOWED_ORIGIN){return new Request('https://api.example.com/api/inquiry',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(data)})}
+test('rejects foreign origins',async()=>assert.equal((await onRequest({request:request(payload,'https://evil.example'),env})).status,403));
+test('rejects missing consent and invalid capacity',async()=>{for(const d of [{...payload,consent:''},{...payload,guests:'71'}])assert.equal((await onRequest({request:request(d),env})).status,400)});
+test('mail delivery uses fixed recipient and all inquiry fields',async()=>{const original=global.fetch;const calls=[];global.fetch=async(url,options)=>{calls.push([url,options]);return Response.json(url.includes('siteverify')?{success:true}:{id:'mock-mail'})};try{assert.equal((await onRequest({request:request(),env})).status,200);const mail=JSON.parse(calls[1][1].body);assert.deepEqual(mail.to,['info@taberna-flamenca.com']);assert.match(mail.subject,/30. Geburtstag – 22.01.2099/);assert.match(mail.text,/Gästezahl: 60/);assert.equal(mail.reply_to,payload.email)}finally{global.fetch=original}});
+test('does not claim success when mail provider fails',async()=>{const original=global.fetch;global.fetch=async url=>url.includes('siteverify')?Response.json({success:true}):new Response('',{status:500});try{assert.equal((await onRequest({request:request(),env})).status,502)}finally{global.fetch=original}});

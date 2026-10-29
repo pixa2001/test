@@ -1,413 +1,65 @@
-<!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Taberna Meldung">
-<meta name="theme-color" content="#111111">
-
-<title>Taberna Flamenca – Meldung</title>
-
-<style>
-:root{
-  --bg:#0d0d0f;
-  --card:#19191d;
-  --line:#303036;
-  --text:#f7f7f4;
-  --muted:#a7a7ad;
-  --orange:#f28c28;
-  --turq:#28c8c2;
-  --gold:#e5b44b;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  min-height:100vh;
-}
-
-.app{
-  max-width:760px;
-  margin:auto;
-  padding:35px 22px;
-}
-
-.brand{
-  font-size:12px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:var(--orange);
-  font-weight:800;
-}
-
-h1{
-  font-size:30px;
-  margin:12px 0 5px;
-}
-
-.hint{
-  color:var(--muted);
-  margin-bottom:25px;
-}
-
-.progress{
-  height:5px;
-  background:#27272b;
-  border-radius:99px;
-  overflow:hidden;
-  margin-bottom:25px;
-}
-
-.progress div{
-  height:100%;
-  background:linear-gradient(90deg,var(--orange),var(--gold));
-  width:25%;
-  transition:.3s;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-
-.btn{
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--text);
-  border-radius:16px;
-  min-height:80px;
-  padding:16px;
-  text-align:left;
-  font-size:16px;
-  font-weight:700;
-}
-
-.btn:active{
-  transform:scale(.98);
-  border-color:var(--orange);
-}
-
-.field{
-  width:100%;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--text);
-  border-radius:14px;
-  padding:15px;
-  font-size:17px;
-  margin:8px 0 20px;
-}
-
-textarea.field{
-  min-height:130px;
-}
-
-.primary{
-  width:100%;
-  border:0;
-  background:var(--orange);
-  color:#17110a;
-  border-radius:15px;
-  min-height:55px;
-  font-size:17px;
-  font-weight:800;
-}
-
-.secondary{
-  width:100%;
-  border:1px solid var(--line);
-  background:transparent;
-  color:var(--text);
-  border-radius:15px;
-  min-height:50px;
-  margin-top:10px;
-  font-size:16px;
-}
-
-.panel{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:17px;
-  padding:18px;
-  margin-bottom:15px;
-}
-
-.mail{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--turq);
-  color:#071313;
-  text-decoration:none;
-  border-radius:15px;
-  min-height:55px;
-  font-weight:800;
-}
+# Taberna Flamenca · Partyraum
 
-.hidden{display:none}
+Responsive React/TypeScript/Vite website for the party room at Salzgasse 8, 50667 Köln. The original issue-reporting page has been replaced as requested. No deployment, DNS modification, or email has been performed by development tests.
 
-pre{
-  white-space:pre-wrap;
-  font-family:inherit;
-  line-height:1.5;
-}
+## Local development
 
-@media(max-width:430px){
-  .grid{grid-template-columns:1fr}
-  .app{padding:25px 16px}
-}
-</style>
-</head>
+Node.js 22.18+ (24 recommended), npm and no database required.
 
-<body>
+```sh
+npm install
+npm run dev
+npm run build
+npm run preview
+npm test
+```
 
-<main class="app">
+Use `npm ci` for repeatable installs. `npm run build` performs strict TypeScript checks and produces `dist/`. `npm test` tests server validation and email-provider behavior with mocked requests, without sending real email. The static development server does not run Cloudflare Functions.
 
-<div class="brand">TABERNA FLAMENCA · MELDESYSTEM</div>
+## Content and photos
 
-<h1 id="title">Wo ist das Problem?</h1>
-<div class="hint" id="hint">Wähle den Bereich aus.</div>
+`src/data/partyraum.json` is the venue knowledge base: facts, FAQ answers, assistant keywords and gallery. `src/data/i18n.ts` contains initial German UI/chat copy and the extension point for English/Spanish. Additional UI labels currently live in components; a complete language switch requires translating those too. `src/components` separates form, accessible dialog gallery and chat.
 
-<div class="progress">
-  <div id="progress"></div>
-</div>
+The bundled SVGs are **atmospheric illustrations, not original photos of the room**. Replace files under `public/images` with licensed real photographs and edit `gallery` entries and `galleryNotice`. Keep descriptive alt text; optimize AVIF/WebP/JPEG dimensions and size. The first image loads eagerly, gallery images lazily. Lightbox supports touch swipes, arrow keys, Escape and native dialog focus containment.
 
-<section id="step1">
+## GitHub Pages
 
-<div class="grid">
+Commit and push the project to `main`. In repository Settings → Pages select GitHub Actions. `.github/workflows/deploy.yml` builds and deploys the static site. Repository variables:
 
-<button class="btn area" data-value="Erdgeschoss">
-🍹<br>Erdgeschoss
-</button>
+- `BASE_PATH`: `/test/` for `pixa2001/test` project Pages; `/` for a custom domain or user Pages.
+- `VITE_API_URL`: HTTPS origin of the separately deployed API, without a trailing path.
+- `VITE_TURNSTILE_SITE_KEY`: public Cloudflare Turnstile site key, scoped to the website hostname.
 
-<button class="btn area" data-value="1. Obergeschoss">
-⬆️<br>1. Obergeschoss
-</button>
+These VITE values are intentionally public. Never use VITE variables for secrets. For a subdomain, configure the custom domain in Pages and the appropriate DNS record at the DNS provider; add the domain to Turnstile and change backend `ALLOWED_ORIGIN`. Do not invent a CNAME before the domain is chosen. Configure an absolute `og:image` and canonical/og:url after the final hostname and real social image are known. All assets support Vite's base path.
 
-<button class="btn area" data-value="Keller">
-📦<br>Keller
-</button>
+## Secure mail backend
 
-<button class="btn area" data-value="Toiletten">
-🚻<br>Toiletten
-</button>
+GitHub Pages cannot send mail. Deploy this same repository to **Cloudflare Pages**, build command `npm run build`, output `dist`, with root `functions/` detected as Pages Functions. GitHub Pages may still serve the public website; Cloudflare hosts `/api/inquiry` and `/api/chat` separately. For an all-Cloudflare deployment, set `VITE_API_URL` to that deployment origin. A full-stack local test is available through Cloudflare Wrangler (`npx wrangler pages dev dist`) after building and configuring a local ignored `.dev.vars` file.
 
-<button class="btn area" data-value="Außenbereich">
-🚪<br>Außenbereich
-</button>
+Set only in Cloudflare's secure environment settings:
 
-<button class="btn area" data-value="Sonstiges">
-•••<br>Sonstiges
-</button>
+- `RESEND_API_KEY`: Resend API key with appropriate sending scope.
+- `MAIL_FROM`: a sender address on a Resend-verified domain, e.g. `Taberna <anfragen@your-verified-domain>`; no sender is assumed here.
+- `ALLOWED_ORIGIN`: exact public website origin, no trailing slash or path, e.g. `https://pixa2001.github.io`.
+- `TURNSTILE_SECRET_KEY`: server-only secret for the public Turnstile site key.
+- `OPENAI_API_KEY`: optional server-only AI key; not needed for local knowledge chat.
 
-</div>
+Use `.env.example` as a names-only template. Never commit `.env`, `.dev.vars` or secret values. Backend rejects unconfigured mail, foreign origins, invalid fields, over-capacity requests and failed Turnstile verification. Turnstile tokens are verified by Cloudflare and not trusted from the browser. Configure edge rate limits for both `/api/*` routes before public launch; origin checking alone is not authentication. Apply provider spend limits before enabling optional AI. Review provider data-processing terms and retention. Form values are sent as plain text with a fixed recipient and validated reply-to, without HTML injection. No request body or secret is logged by application code.
 
-</section>
+All form fields appear in the email to **info@taberna-flamenca.com**, subject `Partyraum-Anfrage – [Anlass] – [DD.MM.YYYY]`. Success appears only after the mail provider accepted the request. This is not proof of inbox delivery or a confirmed booking. If API is missing or fails, the UI explains the issue and links to direct email; it never pretends to submit successfully. A real end-to-end email must be checked after secrets, sender verification and deployment are configured.
 
+## Assistant / AI interface
 
-<section id="step2" class="hidden">
+The local assistant uses `src/data/assistant.ts` and the central FAQ, without external calls or a model key. Unknown information leads to direct inquiry. Availability questions always say the team must check; no availability calendar is connected. Dates in `DD.MM.YYYY` or ISO form transfer to the inquiry form; the form validates future dates.
 
-<div class="grid">
+When `VITE_API_URL` is set the chat calls `POST /api/chat` with `{ "message": "..." }` and expects `{ "answer": "..." }`. Without `OPENAI_API_KEY`, this endpoint uses the same deterministic knowledge match. With a key, unknown queries can be classified by an AI model into a closed set of FAQ IDs; **the model cannot generate venue facts**. Invalid IDs become the unknown answer. The displayed reply is always an exact central knowledge answer. Chat falls back locally if the API is unavailable. A real generative model is deliberately not required for ordinary venue questions. Protect the optional paid endpoint with edge limits before enabling it.
 
-<button class="btn problem" data-value="Defekt / beschädigt">
-🔧<br>Defekt / beschädigt
-</button>
+## Publication checklist / honest limitations
 
-<button class="btn problem" data-value="Funktioniert nicht">
-⚠️<br>Funktioniert nicht
-</button>
+- Supply real venue photos; illustrative visuals are explicitly labelled in the UI.
+- Complete the legal operator name, representation, phone, registry/VAT details where applicable and privacy details. The included legal sections flag missing information; they are not a final legal review.
+- Complete hosting/mail/Turnstile processor agreements, retention and any transfer disclosures. No external font service is loaded; system fonts provide a network-independent fallback.
+- Configure mail/Turnstile and verify real delivery, error behavior and the mobile site on the final domain.
+- Review room price/contract details with the operator; no unprovided fees, deposit, availability or accessibility claims are made.
 
-<button class="btn problem" data-value="Fehlt / nachbestellen">
-📋<br>Fehlt / nachbestellen
-</button>
-
-<button class="btn problem" data-value="Reinigung / Verschmutzung">
-🧹<br>Reinigung
-</button>
-
-</div>
-
-<button class="secondary" onclick="showStep(1)">
-← Zurück
-</button>
-
-</section>
-
-
-<section id="step3" class="hidden">
-
-<label>Was genau ist betroffen?</label>
-
-<input
-id="item"
-class="field"
-placeholder="z. B. Kühlschrank, Licht, Wasserhahn">
-
-<label>Zusätzliche Nachricht</label>
-
-<textarea
-id="note"
-class="field"
-placeholder="Beschreibe kurz, was passiert ist …"></textarea>
-
-<button class="primary" id="create">
-Meldung erstellen
-</button>
-
-<button class="secondary" onclick="showStep(2)">
-← Zurück
-</button>
-
-</section>
-
-
-<section id="step4" class="hidden">
-
-<div class="panel">
-
-<div class="brand">VORSCHAU DER E-MAIL</div>
-
-<h3 id="subject"></h3>
-
-<pre id="preview"></pre>
-
-</div>
-
-<a id="mail" class="mail" href="#">
-✉️ E-Mail im Mail-Programm öffnen
-</a>
-
-<button class="secondary" onclick="restart()">
-Neue Meldung
-</button>
-
-</section>
-
-</main>
-
-
-<script>
-
-let area="";
-let problem="";
-
-const titles=[
-"Wo ist das Problem?",
-"Worum geht es?",
-"Was möchtest du melden?",
-"Meldung fertig"
-];
-
-const hints=[
-"Wähle den Bereich aus.",
-"Wähle aus, was passiert ist.",
-"Beschreibe kurz das Problem.",
-"Prüfe die Meldung."
-];
-
-function showStep(n){
-
-for(let i=1;i<=4;i++){
-document.getElementById("step"+i)
-.classList.toggle("hidden",i!==n);
-}
-
-document.getElementById("title").textContent=titles[n-1];
-document.getElementById("hint").textContent=hints[n-1];
-
-document.getElementById("progress").style.width=(n*25)+"%";
-
-}
-
-document.querySelectorAll(".area").forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-area=button.dataset.value;
-
-showStep(2);
-
-});
-
-});
-
-
-document.querySelectorAll(".problem").forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-problem=button.dataset.value;
-
-showStep(3);
-
-});
-
-});
-
-
-document.getElementById("create").addEventListener("click",()=>{
-
-const item=document.getElementById("item").value.trim();
-
-const note=document.getElementById("note").value.trim();
-
-if(!item){
-
-alert("Bitte gib an, was betroffen ist.");
-
-return;
-
-}
-
-const subject=
-"Taberna – Meldung: "+area+" – "+item;
-
-const body=
-`TABERNA FLAMENCA – MELDUNG
-
-Bereich: ${area}
-
-Problem: ${problem}
-
-Betroffen: ${item}
-
-Beschreibung:
-${note || "Keine zusätzliche Angabe."}`;
-
-document.getElementById("subject").textContent=
-"Betreff: "+subject;
-
-document.getElementById("preview").textContent=body;
-
-document.getElementById("mail").href=
-"mailto:?subject="+encodeURIComponent(subject)+
-"&body="+encodeURIComponent(body);
-
-showStep(4);
-
-});
-
-
-function restart(){
-
-area="";
-problem="";
-
-document.getElementById("item").value="";
-document.getElementById("note").value="";
-
-showStep(1);
-
-}
-
-</script>
-
-</body>
-</html>
+The app is a working first implementation, but public launch depends on those business/legal and service settings.
